@@ -3,9 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 // Custom event type for fish hover
-interface FishHoverEvent {
-  detail: boolean
-}
+type FishHoverEvent = boolean
 
 const cursorImages = [
   '/images/cursor/Group 3-1.png',

@@ -5,15 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 type Category = 'ALL' | 'UI/UX DESIGN' | 'PRODUCT DESIGN' | 'GRAPHIC DESIGN'
 
-interface Project {
+export interface Project {
   id: number
   title: string
   description: string
   tags: string[]
   tagColors: string[]
   image: string
-  folder: string  // 项目图片文件夹
-  imageCount: number  // 图片数量
+  folder?: string  // 项目图片文件夹
+  imageCount?: number  // 图片数量
   extensions?: string[]  // 每个图片的扩展名，如 ['jpg', 'png', 'jpg', ...]
 }
 
@@ -274,10 +274,10 @@ function ProjectDetail({ project, onBack }: { project: Project; onBack: () => vo
 
   // Build image list using extensions array if available
   const images: string[] = []
-  for (let i = 0; i < project.imageCount; i++) {
+  for (let i = 0; i < (project.imageCount ?? 0); i++) {
     const num = getStartNumber() + i
     const ext = project.extensions?.[i] || 'jpg'
-    images.push(`${project.folder}/${num}.${ext}`)
+    images.push(`${project.folder ?? ''}/${num}.${ext}`)
   }
 
   return (

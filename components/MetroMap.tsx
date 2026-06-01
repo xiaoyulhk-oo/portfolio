@@ -6,15 +6,9 @@ import { stations } from '@/data/guangzhou-metro';
 
 interface MetroMapProps {
   onStationClick: (station: Station) => void;
+  selectedOrigin?: Station | null;
+  selectedDestination?: Station | null;
   mapImageUrl?: string;
-}
-
-// OpenSeadragon viewer type
-interface OpenSeadragonViewer {
-  open: (url: string) => void;
-  addHandler: (event: string, handler: () => void) => void;
-  removeHandler: (event: string, handler: () => void) => void;
-  destroy: () => void;
 }
 
 // 站点点击检测半径（像素）
@@ -24,7 +18,8 @@ export default function MetroMap({
   onStationClick,
   mapImageUrl = '/assets/img/metro/map/routemap_gz_cn.png',
 }: MetroMapProps) {
-  const viewerRef = useRef<OpenSeadragonViewer | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const viewerRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // 查找最近的站点
